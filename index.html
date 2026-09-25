@@ -1,1 +1,39 @@
-Express starter
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipes endpoints</title>
+  </head>
+  <body>
+    <h1>Endpoints</h1>
+    <h2>GET /recipes HTTP/1.1</h2>
+    <h3>Get all recipes</h3>
+    <hr />
+
+    <h2>GET /recipes/:id HTTP/1.1</h2>
+    <h3>Get a recipe by id</h3>
+    <h3>:id is a number</h3>
+    <hr />
+
+    <h2>POST /recipes HTTP/1.1</h2>
+    <h3>Add a recipe</h3>
+    <h3>
+      Json format: { name, ingredients, instructions, username, categoryname }
+    </h3>
+    <hr />
+
+    <h2>GET /users HTTP/1.1</h2>
+    <h3>Get all users</h3>
+    <hr />
+
+    <h2>POST /users HTTP/1.1</h2>
+    <h3>Add a user</h3>
+    <h3>Json format: { username }</h3>
+    <hr />
+
+    <h2>GET /categories HTTP/1.1</h2>
+    <h3>Get all categories</h3>
+    <hr />
+  </body>
+</html>

@@ -98,7 +98,7 @@ app.post('/recipes', async (req, res) => {
 app.get('/users', async (req, res) => {
     try {
         const result = await pool.query(
-            `SELECT username from users ORDER BY username ASC`
+            `SELECT id, username, email from users ORDER BY username ASC`
         );
         res.json(result.rows);
     } catch (err) {
@@ -109,12 +109,12 @@ app.get('/users', async (req, res) => {
 
 //add new user
 app.post('/users', async (req, res) => {
-    const { username } = req.body;
+    const { username, email } = req.body;
 
     try {
         const result = await pool.query(
-            'INSERT INTO users (username) VALUES ($1) RETURNING *',
-            [username]
+            'INSERT INTO users (username, email) VALUES ($1, $2) RETURNING *',
+            [username, email]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -123,11 +123,11 @@ app.post('/users', async (req, res) => {
     }
 });
 
-//get all recipes
+//get all categories
 app.get('/categories', async (req, res) => {
     try {
         const result = await pool.query(
-            `SELECT name from categories ORDER BY name ASC`
+            `SELECT id, name from categories ORDER BY name ASC`
         );
         res.json(result.rows);
     } catch (err) {
