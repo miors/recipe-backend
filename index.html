@@ -3,37 +3,191 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipes endpoints</title>
+    <title>Recipes API Endpoints</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        color: #333;
+      }
+      h1 {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        color: #222;
+      }
+      h2 {
+        margin-top: 30px;
+        color: #0066cc;
+      }
+      .method {
+        background: #e7f4ff;
+        color: #0066cc;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+      .method.post {
+        background: #e7f9ed;
+        color: #1f8b4c;
+      }
+      pre {
+        background: #f8f9fa;
+        border: 1px solid #e1e4e6;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+      }
+      code {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.9em;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      hr {
+        border: 0;
+        height: 1px;
+        background: #eee;
+        margin: 40px 0;
+      }
+    </style>
   </head>
   <body>
-    <h1>Endpoints</h1>
-    <h2>GET /recipes HTTP/1.1</h2>
-    <h3>Get all recipes</h3>
+    <h1>Recipes API Reference</h1>
+
+    <!-- GET /recipes -->
+    <h2><span class="method">GET</span> /recipes</h2>
+    <p>
+      <strong>Description:</strong> Retrieves a comprehensive list of all
+      recipes.
+    </p>
+    <p><strong>Response Status:</strong> <code>200 OK</code></p>
+    <p><strong>Response Body (JSON):</strong></p>
+    <pre><code>[
+  {
+    "id": 1,
+    "name": "Spaghetti Carbonara",
+    "ingredients": "pasta, eggs, pancetta, cheese",
+    "instructions": "Cook pasta. Fry pancetta. Mix everything together.",
+    "username": "chef_mario",
+    "categoryname": "vegan"
+  }
+]</code></pre>
+
     <hr />
 
-    <h2>GET /recipes/:id HTTP/1.1</h2>
-    <h3>Get a recipe by id</h3>
-    <h3>:id is a number</h3>
+    <!-- GET /recipes/:id -->
+    <h2><span class="method">GET</span> /recipes/:id</h2>
+    <p>
+      <strong>Description:</strong> Retrieves details of a specific recipe using
+      its unique ID.
+    </p>
+    <p><strong>URL Parameters:</strong></p>
+    <ul>
+      <li>
+        <code>:id</code> (Number, Required) — The unique identifier of the
+        recipe.
+      </li>
+    </ul>
+    <p>
+      <strong>Response Status:</strong> <code>200 OK</code> /
+      <code>404 Not Found</code>
+    </p>
+    <p><strong>Response Body (JSON):</strong></p>
+    <pre><code>{ 
+  "id": 1,
+  "name": "Spaghetti Carbonara",
+  "ingredients": "pasta, eggs, pancetta, cheese",
+  "instructions": "Cook pasta. Fry pancetta. Mix everything together.",
+  "username": "chef_mario",
+  "categoryname": "vegan"
+}</code></pre>
+
     <hr />
 
-    <h2>POST /recipes HTTP/1.1</h2>
-    <h3>Add a recipe</h3>
-    <h3>
-      Json format: { name, ingredients, instructions, username, categoryname }
-    </h3>
+    <!-- POST /recipes -->
+    <h2><span class="method post">POST</span> /recipes</h2>
+    <p>
+      <strong>Description:</strong> Creates and adds a new recipe to the
+      collection.
+    </p>
+    <p><strong>Request Body (JSON):</strong></p>
+    <pre><code>{
+  "name": "String",
+  "ingredients": "String",
+  "instructions": "String",
+  "username": "String",
+  "categoryname": "String"
+}</code></pre>
+    <p>
+      <strong>Response Status:</strong> <code>201 Created</code> /
+      <code>400 Bad Request</code>
+    </p>
+
     <hr />
 
-    <h2>GET /users HTTP/1.1</h2>
-    <h3>Get all users</h3>
+    <!-- GET /users -->
+    <h2><span class="method">GET</span> /users</h2>
+    <p>
+      <strong>Description:</strong> Retrieves a list of all registered
+      users(chefs).
+    </p>
+    <p><strong>Response Status:</strong> <code>200 OK</code></p>
+    <p><strong>Response Body (JSON):</strong></p>
+    <pre><code>[
+  {
+    "id":1,
+    "username": "chef_mario",
+    "email": "chef_mario@gmail.com"
+  },
+  {
+    "id":2,
+    "username": "chef_mior",
+    "email": "chef_mior@gmail.com"
+  }
+]</code></pre>
+
     <hr />
 
-    <h2>POST /users HTTP/1.1</h2>
-    <h3>Add a user</h3>
-    <h3>Json format: { username }</h3>
+    <!-- POST /users -->
+    <h2><span class="method post">POST</span> /users</h2>
+    <p><strong>Description:</strong> Registers a new user(chef) account.</p>
+    <p><strong>Request Body (JSON):</strong></p>
+    <pre><code>{
+  "username": "String",
+  "email": "String"
+}</code></pre>
+    <p>
+      <strong>Response Status:</strong> <code>201 Created</code> /
+      <code>400 Bad Request</code>
+    </p>
+
     <hr />
 
-    <h2>GET /categories HTTP/1.1</h2>
-    <h3>Get all categories</h3>
-    <hr />
+    <!-- GET /categories -->
+    <h2><span class="method">GET</span> /categories</h2>
+    <p>
+      <strong>Description:</strong> Retrieves a list of all recipe categories
+      available.
+    </p>
+    <p><strong>Response Status:</strong> <code>200 OK</code></p>
+    <p><strong>Response Body (JSON):</strong></p>
+    <pre><code>[
+  {
+    "id": "1",
+    "categoryname": "vegan"
+  },
+  {
+    "id": "2",
+    "categoryname": "vegetarian"
+  }
+]</code></pre>
   </body>
 </html>

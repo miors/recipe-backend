@@ -25,7 +25,7 @@ app.get('/recipes', async (req, res) => {
         const result = await pool.query(
             `SELECT recipes.id, recipes.name, recipes.ingredients, recipes.instructions, users.username AS author, categories.name AS category
        FROM recipes JOIN users ON recipes.author_id = users.id JOIN categories on recipes.category_id = categories.id
-       ORDER BY recipes.name ASC`
+       ORDER BY recipes.id DESC`
         );
         res.json(result.rows);
     } catch (err) {
@@ -59,6 +59,8 @@ app.post('/recipes', async (req, res) => {
     const { name, ingredients, instructions, username, categoryname } = req.body;
 
     //get author_id and category_id
+
+
     let author_id = null
     let category_id = null
     try {
@@ -87,6 +89,9 @@ app.post('/recipes', async (req, res) => {
             'INSERT INTO recipes (name, ingredients, instructions, author_id, category_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
             [name, ingredients, instructions, author_id, category_id]
         );
+        if (result.rows.length === 0) {
+            return res.status(400).json({ error: 'Bad request. Recipe not added' });
+        }
         res.status(201).json(result.rows[0]);
     } catch (err) {
         console.error(err);
@@ -136,6 +141,7 @@ app.get('/categories', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-  console.log("App is listening on port 3000");
+const PORT = process.env.PORT || 3002;
+app.listen(PORT, () => {
+  console.log("App is listening on port 3002");
 });
