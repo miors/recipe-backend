@@ -1,6 +1,6 @@
 This is API backend for the frontend at: https://recipe-frontend-production-bdd0.up.railway.app/
 
-Thw frontend code and documentation could be found here: https://github.com/miors/recipe-frontend
+The frontend code and documentation could be found here: https://github.com/miors/recipe-frontend
 
 For futher info on API documentation, go to: https://recipe-backend-production-0156.up.railway.app/
 
