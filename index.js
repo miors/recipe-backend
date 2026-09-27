@@ -54,6 +54,24 @@ app.get('/recipes/:id', async (req, res) => {
     }
 });
 
+//delete a recipe
+app.delete('/recipes/:id', async (req, res) => {
+   const { id } = req.params;
+   
+   try {
+    const result = await pool.query(
+        `DELETE FROM recipes WHERE id = $1 RETURNING *`, [id]
+    );
+    if (result.rows.length === 0) {
+            return res.status(400).json({ error: 'Bad request. Recipe not added' });
+        }
+
+        res.status(200).json(result.rows[0]);
+   } catch (err){
+
+   }
+})
+
 //add recipe
 app.post('/recipes', async (req, res) => {
     const { name, ingredients, instructions, username, categoryname } = req.body;
@@ -68,7 +86,6 @@ app.post('/recipes', async (req, res) => {
             `SELECT id from users WHERE username = $1`, [username]
         );
         author_id = result.rows[0].id;
-        console.log(`author id: ${author_id}`)
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Something went wrong' });

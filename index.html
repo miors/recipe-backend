@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipes API Endpoints</title>
+    <title>MioRecipes API Endpoints</title>
     <style>
       body {
         font-family:
@@ -189,5 +189,33 @@
     "categoryname": "vegetarian"
   }
 ]</code></pre>
+    <hr />
+
+    <!-- DELETE /recipes/:id -->
+    <h2><span class="method">DELETE</span> /recipes/:id</h2>
+    <p>
+      <strong>Description:</strong> Deletes a specific recipe using its unique
+      ID.
+    </p>
+    <p><strong>URL Parameters:</strong></p>
+    <ul>
+      <li>
+        <code>:id</code> (Number, Required) — The unique identifier of the
+        recipe.
+      </li>
+    </ul>
+    <p>
+      <strong>Response Status:</strong> <code>200 OK</code> /
+      <code>400 Bad Request</code>
+    </p>
+    <p><strong>Response Body (JSON):</strong></p>
+    <pre><code>{ 
+  "id": 1,
+  "name": "Spaghetti Carbonara",
+  "ingredients": "pasta, eggs, pancetta, cheese",
+  "instructions": "Cook pasta. Fry pancetta. Mix everything together.",
+  "username": "chef_mario",
+  "categoryname": "vegan"
+}</code></pre>
   </body>
 </html>
